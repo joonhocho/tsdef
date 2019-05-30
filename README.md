@@ -25,6 +25,7 @@ const nullableString: Nullable<string> = null; // ok
 const nonNullString: NonNull<string | null> = null; // error
 ```
 
+## Documentation
 
 ```typescript
 export type nil = null | undefined;
