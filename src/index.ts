@@ -1,7 +1,3 @@
-# tsdef
-TypeScript common patterns shortcuts definitions snippets utility gist library
-
-```typescript
 export type nil = null | undefined;
 
 export type Nilable<T> = T | nil;
@@ -280,4 +276,3 @@ export type HaveSameKeys<T, U, True, False = never> = (
 export type Exact<T, X extends T> = T &
   { [K in keyof X]: K extends keyof T ? X[K] : never };
 // U extends Exact<{ [K in keyof T]-?: (v: T[K]) => any }, U>
-```
