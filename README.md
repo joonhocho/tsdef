@@ -1,9 +1,8 @@
 # tsdef
 TypeScript common patterns shortcuts definitions snippets utility gist library
 
-[![Build Status](https://travis-ci.org/joonhocho/tsdef.svg?branch=master)](https://travis-ci.org/joonhocho/tsdef)
-[![Coverage Status](https://coveralls.io/repos/github/joonhocho/tsdef/badge.svg?branch=master)](https://coveralls.io/github/joonhocho/tsdef?branch=master)
 [![npm version](https://badge.fury.io/js/tsdef.svg)](https://badge.fury.io/js/tsdef)
+[![Build Status](https://travis-ci.org/joonhocho/tsdef.svg?branch=master)](https://travis-ci.org/joonhocho/tsdef)]
 [![Dependency Status](https://david-dm.org/joonhocho/tsdef.svg)](https://david-dm.org/joonhocho/tsdef)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 
