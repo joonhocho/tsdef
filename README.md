@@ -2,9 +2,11 @@
 TypeScript common patterns shortcuts definitions snippets utility gist library
 
 [![npm version](https://badge.fury.io/js/tsdef.svg)](https://badge.fury.io/js/tsdef)
+[![npm](https://img.shields.io/npm/dw/tsdef.svg)](https://www.npmjs.com/package/tsdef)
+![npm type definitions](https://img.shields.io/npm/types/tsdef.svg)
 [![Build Status](https://travis-ci.org/joonhocho/tsdef.svg?branch=master)](https://travis-ci.org/joonhocho/tsdef)
 [![Dependency Status](https://david-dm.org/joonhocho/tsdef.svg)](https://david-dm.org/joonhocho/tsdef)
-[![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
+[![GitHub](https://img.shields.io/github/license/joonhocho/tsdef.svg)](https://github.com/joonhocho/tsdef/blob/master/LICENSE)
 
 ## Get Started
 ```
