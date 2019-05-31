@@ -25,8 +25,7 @@ const nullableString: Nullable<string> = null; // ok
 const nonNullString: NonNull<string | null> = null; // error
 ```
 
-## Documentation
-
+## Documentation ([Source Code](https://github.com/joonhocho/tsdef/blob/master/src/index.ts))
 ```typescript
 export type nil = null | undefined;
 
