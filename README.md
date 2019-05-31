@@ -309,7 +309,8 @@ export type Exact<T, X extends T> = T &
 ```
 
 ## Contribute
-Pull Requests are welcome! Just try to be consistent with existing naming conventions and coding styles.  
+Pull Requests are welcome!  
+Just try to be consistent with existing naming conventions and coding styles.  
 Names must be concise, easy to read, and precisely descriptive.  
 I've setup prettier, so make sure your codes are auto formatted according to my prettier setup.
 
