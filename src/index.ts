@@ -124,6 +124,15 @@ export type WithNonNullKeys<T, K extends keyof T> = Omit<T, K> &
 export type WithNonUndefinedKeys<T, K extends keyof T> = Omit<T, K> &
   NonUndefinedProps<Pick<T, K>>;
 
+// make all properties optional recursively including nested objects.
+// keep in mind that this should be used on json / plain objects only.
+// otherwise, it will make class methods optional as well.
+export type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends Array<infer I>
+    ? Array<DeepPartial<I>>
+    : DeepPartial<T[P]>
+};
+
 // first object properties excluding common keys with second object
 export type DiffObjects<T, U> = Omit<T, keyof U>;
 
