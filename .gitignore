@@ -71,3 +71,4 @@ es6
 # Temp file
 *.swp
 *~
+report.*.json

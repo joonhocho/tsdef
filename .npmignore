@@ -6,6 +6,7 @@ coverage
 src
 jest.config.js
 prettier.config.js
+report.*.json
 tsconfig.es5.json
 tsconfig.es6.json
 tsconfig.json
