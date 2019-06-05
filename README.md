@@ -247,7 +247,7 @@ export type InheritClass<C1 extends AnyClass, C2 extends AnyClass> = {
   >;
 } & OverwriteProps<C2, C1>;
 
-// return Then if T is not null nor undefined, otherwise return False
+// return True if T is not null nor undefined, otherwise return False
 // test null and undefined separately to prevent side effect from args distribution
 export type IsNonNil<T, True, False = never> = null extends T
   ? False
