@@ -38,7 +38,11 @@ export type NonNullProps<T> = { [P in keyof T]: NonNull<T[P]> };
 // make all properties non undefined
 export type NonUndefinedProps<T> = { [P in keyof T]-?: NonUndefined<T[P]> };
 
+// make all properties required
 export type RequiredProps<T> = { [P in keyof T]-?: T[P] };
+
+// make all properties non readonly
+export type WritableProps<T> = { -readonly [P in keyof T]: T[P] };
 
 // string | number | symbol
 export type AnyKey = keyof any;
@@ -87,13 +91,13 @@ export type Property<T, K> = K extends keyof T ? T[K] : never;
 
 // get keys with values of given type
 export type KeyOfType<T, U> = {
-  [P in keyof T]-?: T[P] extends U ? P : never
+  [P in keyof T]-?: T[P] extends U ? P : never;
 }[keyof T];
 
 // get keys with values of given sub type
 // For some reason, this works and KeyOfType doesn't when U = undefined
 export type KeyOfSubType<T, U> = {
-  [P in keyof T]-?: U extends T[P] ? P : never
+  [P in keyof T]-?: U extends T[P] ? P : never;
 }[keyof T];
 
 // make some keys optional
@@ -130,7 +134,7 @@ export type WithNonUndefinedKeys<T, K extends keyof T> = Omit<T, K> &
 export type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends Array<infer I>
     ? Array<DeepPartial<I>>
-    : DeepPartial<T[P]>
+    : DeepPartial<T[P]>;
 };
 
 // first object properties excluding common keys with second object

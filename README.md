@@ -68,7 +68,11 @@ export type NonNullProps<T> = { [P in keyof T]: NonNull<T[P]> };
 // make all properties non undefined
 export type NonUndefinedProps<T> = { [P in keyof T]-?: NonUndefined<T[P]> };
 
+// make all properties required
 export type RequiredProps<T> = { [P in keyof T]-?: T[P] };
+
+// make all properties non readonly
+export type WritableProps<T> = { -readonly [P in keyof T]: T[P] };
 
 // string | number | symbol
 export type AnyKey = keyof any;
@@ -247,7 +251,7 @@ export type InheritClass<C1 extends AnyClass, C2 extends AnyClass> = {
   >;
 } & OverwriteProps<C2, C1>;
 
-// return True if T is not null nor undefined, otherwise return False
+// return Then if T is not null nor undefined, otherwise return False
 // test null and undefined separately to prevent side effect from args distribution
 export type IsNonNil<T, True, False = never> = null extends T
   ? False
