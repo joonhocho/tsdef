@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "declarationDir": "lib",
+    "declarationMap": true,
+    "emitDecoratorMetadata": true,
+    "importHelpers": true,
+    "noEmit": false,
+    "noEmitHelpers": true,
+    "preserveConstEnums": true,
+    "removeComments": true,
+    "sourceMap": true
+  },
+  "exclude": ["node_modules", "src/**/*.test.ts"]
+}
