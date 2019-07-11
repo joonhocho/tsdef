@@ -1,6 +1,6 @@
 {
   "name": "tsdef",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "TypeScript common pattern shortcut definitions / utility gist library",
   "keywords": [
     "TypeScript",
@@ -56,5 +56,6 @@
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.5.2"
-  }
+  },
+  "sideEffects": false
 }
