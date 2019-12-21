@@ -245,8 +245,8 @@ export type IsNever<T, True, False = never> = [T] extends [never]
 
 // return True if T is `any`, otherwise return False
 export type IsAny<T, True, False = never> = (
-  | True
-  | False) extends (T extends never ? True : False)
+  | true
+  | false) extends (T extends never ? true : false)
   ? True
   : False;
 
