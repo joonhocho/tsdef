@@ -11,6 +11,9 @@ export type MaybePromise<T> = T | Promise<T>;
 export type MaybeArray<T> = T | T[];
 export type MaybeAsReturnType<T> = T | ((...args: any) => T);
 
+// function may or may not return a T
+export type Voidable<T> = T | void;
+
 // removes both null or undefined from T
 export type NonNil<T> = T extends nil ? never : T;
 
