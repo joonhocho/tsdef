@@ -204,7 +204,7 @@ connect.lock
 coverage/
 crashlytics-build.properties
 crashlytics.properties
-dist/
+
 docs/_book
 ehthumbs.db
 ehthumbs_vista.db
