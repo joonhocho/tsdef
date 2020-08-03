@@ -120,7 +120,7 @@ export type NilableToNullableProps<T> = Omit<
   { [P in keyof T]: T[P] },
   NilableKeys<T>
 > &
-  Pick<{ [P in keyof T]-?: NonUndefined<T[P]> | null }, NilableKeys<T>>;
+  Pick<{ [P in keyof T]: NonUndefined<T[P]> | null }, NilableKeys<T>>;
 
 // make all nilable properties to optional undefindeable: nil? -> undefined?
 export type NilableToOptionalProps<T> = Omit<
