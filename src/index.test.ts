@@ -1,6 +1,6 @@
 import { nil } from './index';
 
-test('nil', () => {
+test('nil', (): void => {
   const nil1: nil = null;
   expect(nil1).toBe(null);
 

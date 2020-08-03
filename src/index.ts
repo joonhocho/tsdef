@@ -20,6 +20,55 @@ export type NonNull<T> = T extends null ? never : T;
 // removes undefined from T
 export type NonUndefined<T> = T extends undefined ? never : T;
 
+// return Then if T is not null nor undefined, otherwise return False
+// test null and undefined separately to prevent side effect from args distribution
+export type IsNonNil<T, True, False = never> = null extends T
+  ? False
+  : undefined extends T
+  ? False
+  : True;
+
+// return Then if T can be null or undefined, otherwise return False
+export type IsNilable<T, True, False = never> = null extends T
+  ? True
+  : undefined extends T
+  ? True
+  : False;
+
+// return True if T is not null, otherwise return False
+export type IsNonNull<T, True, False = never> = null extends T ? False : True;
+
+// return True if T is nullable, otherwise return False
+export type IsNullable<T, True, False = never> = null extends T ? True : False;
+
+// return True if T is not undefined, otherwise return False
+export type IsNonUndefined<T, True, False = never> = undefined extends T
+  ? False
+  : True;
+
+// return True if T is undefinedable, otherwise return False
+export type IsUndefinedable<T, True, False = never> = undefined extends T
+  ? True
+  : False;
+
+// return True if T is `never`, otherwise return False
+// wrap with array to prevent args distributing
+export type IsNever<T, True, False = never> = [T] extends [never]
+  ? True
+  : False;
+
+// return True if T is `any`, otherwise return False
+export type IsAny<T, True, False = never> = True | False extends (
+  T extends never ? True : False
+)
+  ? True
+  : False;
+
+// return True if T is `unknown`, otherwise return False
+export type IsUnknown<T, True, False = never> = unknown extends T
+  ? IsAny<T, False, True>
+  : False;
+
 // make all properties nilable
 export type NilableProps<T> = { [P in keyof T]?: T[P] | nil };
 
@@ -40,6 +89,45 @@ export type NonUndefinedProps<T> = { [P in keyof T]-?: NonUndefined<T[P]> };
 
 // make all properties required
 export type RequiredProps<T> = { [P in keyof T]-?: T[P] };
+
+// keys of properties with values that can be undefined
+export type UndefinedableKeys<T> = Exclude<
+  { [K in keyof T]: IsUndefinedable<T[K], K> }[keyof T],
+  undefined
+>;
+
+// keys of properties with values that can be undefined
+export type NullableKeys<T> = Exclude<
+  { [K in keyof T]: IsNullable<T[K], K> }[keyof T],
+  undefined
+>;
+
+// keys of properties with values that can be undefined
+export type NilableKeys<T> = Exclude<
+  { [K in keyof T]: IsNilable<T[K], K> }[keyof T],
+  undefined
+>;
+
+// make all nilable properties to optional nilable: nil? -> nil?
+export type NilableToNilableProps<T> = Omit<
+  { [P in keyof T]: T[P] },
+  NilableKeys<T>
+> &
+  Pick<{ [P in keyof T]?: T[P] | nil }, NilableKeys<T>>;
+
+// make all nilable properties to non-optional nullable: nil? -> null-?
+export type NilableToNullableProps<T> = Omit<
+  { [P in keyof T]: T[P] },
+  NilableKeys<T>
+> &
+  Pick<{ [P in keyof T]-?: NonUndefined<T[P]> | null }, NilableKeys<T>>;
+
+// make all nilable properties to optional undefindeable: nil? -> undefined?
+export type NilableToOptionalProps<T> = Omit<
+  { [P in keyof T]: T[P] },
+  NilableKeys<T>
+> &
+  Pick<{ [P in keyof T]?: NonNull<T[P]> | undefined }, NilableKeys<T>>;
 
 // make all properties non readonly
 export type WritableProps<T> = { -readonly [P in keyof T]: T[P] };
@@ -221,50 +309,18 @@ export type InheritClass<C1 extends AnyClass, C2 extends AnyClass> = {
   >;
 } & OverwriteProps<C2, C1>;
 
-// return Then if T is not null nor undefined, otherwise return False
-// test null and undefined separately to prevent side effect from args distribution
-export type IsNonNil<T, True, False = never> = null extends T
-  ? False
-  : undefined extends T
-  ? False
-  : True;
-
-// return True if T is not null, otherwise return False
-export type IsNonNull<T, True, False = never> = null extends T ? False : True;
-
-// return True if T is not undefined, otherwise return False
-export type IsNonUndefined<T, True, False = never> = undefined extends T
-  ? False
-  : True;
-
-// return True if T is `never`, otherwise return False
-// wrap with array to prevent args distributing
-export type IsNever<T, True, False = never> = [T] extends [never]
-  ? True
-  : False;
-
-// return True if T is `any`, otherwise return False
-export type IsAny<T, True, False = never> = (
-  | True
-  | False) extends (T extends never ? True : False)
-  ? True
-  : False;
-
-// return True if T is `unknown`, otherwise return False
-export type IsUnknown<T, True, False = never> = unknown extends T
-  ? IsAny<T, False, True>
-  : False;
-
 // return True if T strictly includes U, otherwise return False
 export type StrictlyIncludes<T, U, True, False = never> = Exclude<
   U,
   T
 > extends never
-  ? (IsAny<T, 1, 0> extends 1
-      ? True
-      : (IsAny<U, 1, 0> extends 1
-          ? False
-          : (IsUnknown<T, 1, 0> extends 1 ? IsUnknown<U, True, False> : True)))
+  ? IsAny<T, 1, 0> extends 1
+    ? True
+    : IsAny<U, 1, 0> extends 1
+    ? False
+    : IsUnknown<T, 1, 0> extends 1
+    ? IsUnknown<U, True, False>
+    : True
   : False;
 
 // tests and returns True if they are equal, False otherwise.
@@ -279,9 +335,9 @@ export type AreStrictlyEqual<T, U, True, False = never> = StrictlyIncludes<
   : False;
 
 // tests and returns True if both objects have same keys, False otherwise.
-export type HaveSameKeys<T, U, True, False = never> = (
+export type HaveSameKeys<T, U, True, False = never> =
   | Exclude<keyof T, keyof U>
-  | Exclude<keyof U, keyof T>) extends never
+  | Exclude<keyof U, keyof T> extends never
   ? True
   : False;
 
