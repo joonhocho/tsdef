@@ -1,6 +1,6 @@
 {
   "name": "tsdef",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "TypeScript common pattern shortcut definitions / utility gist library",
   "keywords": [
     "TypeScript",
