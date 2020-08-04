@@ -225,6 +225,14 @@ export type DeepPartial<T> = {
     : DeepPartial<T[P]>;
 };
 
+// make all properties readonly recursively including
+// nested objects and arrays
+export type DeepReadonly<T> = {
+  readonly [P in keyof T]: T[P] extends Array<infer I>
+    ? ReadonlyArray<DeepReadonly<I>>
+    : DeepReadonly<T[P]>;
+};
+
 // first object properties excluding common keys with second object
 export type DiffObjects<T, U> = Omit<T, keyof U>;
 
